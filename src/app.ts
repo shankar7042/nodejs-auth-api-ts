@@ -1,6 +1,8 @@
 require("dotenv").config();
 import express from "express";
 import config from "config";
+import { connectDB } from "./utils/connectDB";
+import { log } from "./utils/logger";
 
 const app = express();
 
@@ -10,5 +12,6 @@ app.get("/", (_, res) => {
 
 const port = config.get<string>("port");
 app.listen(port, () => {
-  console.log(`Server started at port ${port}`);
+  log.info(`Server started at port ${port}`);
+  connectDB();
 });
